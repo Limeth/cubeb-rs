@@ -4,6 +4,9 @@
 extern crate pkg_config;
 extern crate submodules;
 
+use std::fs::File;
+use std::path::Path;
+use std::io::{BufReader, BufRead};
 use std::process::Command;
 use std::env;
 
@@ -13,6 +16,22 @@ fn check_command(cmd: &str) -> bool {
                               .unwrap_or_else(|e| {
     panic!("Failed to execute command: {}", e)
   }).success();
+}
+
+fn append_to_cubeb_cmakelists(path: &Path) {
+    const lines_to_add: &str = r#"# Start of auto-generated code by cubeb-rs
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+# End of auto-generated code by cubeb-rs"#;
+    let mut file = File::open(path).expect("Could not open CMakeLists.txt");
+    let mut reader = BufReader::new(file);
+
+    for line in reader.lines() {
+        match line {
+            Ok(line) => println!("{}", line),
+            Err(err) => panic!("{}", err),
+        }
+    }
 }
 
 fn main()
@@ -68,6 +87,11 @@ fn main()
       }).success(), "`make clean` exited with an error.");
   }
 
+  let project_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+  let cmakelists = Path::new(&project_dir).join(cubeb_dir).join("CMakeLists.txt");
+
+  append_to_cubeb_cmakelists(&cmakelists);
+
   assert!(Command::new("cmake").arg("..")
                                  .status()
                                  .unwrap_or_else(|e| {
@@ -86,8 +110,8 @@ fn main()
   //   panic!("Failed to execute command: {}", e);
   // }).success(), "ctest exited with an error.");
 
-  let project_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-
   println!("cargo:rustc-link-search=native={}/cubeb/build", project_dir);
   println!("cargo:rustc-link-lib=static=cubeb");
+  println!("cargo:rustc-link-lib=stdc++");
+  println!("cargo:rustc-link-lib=asound");
 }

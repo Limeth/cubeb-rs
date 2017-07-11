@@ -563,89 +563,73 @@ impl Clone for lldiv_t {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    #[link_name = "_Z22__ctype_get_mb_cur_max"]
     pub fn __ctype_get_mb_cur_max() -> usize;
 }
 extern "C" {
-    #[link_name = "_Z4atof"]
     pub fn atof(__nptr: *const ::std::os::raw::c_char) -> f64;
 }
 extern "C" {
-    #[link_name = "_Z4atoi"]
     pub fn atoi(__nptr: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z4atol"]
     pub fn atol(__nptr: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z5atoll"]
     pub fn atoll(__nptr: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_longlong;
 }
 extern "C" {
-    #[link_name = "_Z6strtod"]
     pub fn strtod(__nptr: *const ::std::os::raw::c_char,
                   __endptr: *mut *mut ::std::os::raw::c_char) -> f64;
 }
 extern "C" {
-    #[link_name = "_Z6strtof"]
     pub fn strtof(__nptr: *const ::std::os::raw::c_char,
                   __endptr: *mut *mut ::std::os::raw::c_char) -> f32;
 }
 extern "C" {
-    #[link_name = "_Z7strtold"]
     pub fn strtold(__nptr: *const ::std::os::raw::c_char,
                    __endptr: *mut *mut ::std::os::raw::c_char) -> f64;
 }
 extern "C" {
-    #[link_name = "_Z6strtol"]
     pub fn strtol(__nptr: *const ::std::os::raw::c_char,
                   __endptr: *mut *mut ::std::os::raw::c_char,
                   __base: ::std::os::raw::c_int) -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7strtoul"]
     pub fn strtoul(__nptr: *const ::std::os::raw::c_char,
                    __endptr: *mut *mut ::std::os::raw::c_char,
                    __base: ::std::os::raw::c_int) -> ::std::os::raw::c_ulong;
 }
 extern "C" {
-    #[link_name = "_Z6strtoq"]
     pub fn strtoq(__nptr: *const ::std::os::raw::c_char,
                   __endptr: *mut *mut ::std::os::raw::c_char,
                   __base: ::std::os::raw::c_int)
      -> ::std::os::raw::c_longlong;
 }
 extern "C" {
-    #[link_name = "_Z7strtouq"]
     pub fn strtouq(__nptr: *const ::std::os::raw::c_char,
                    __endptr: *mut *mut ::std::os::raw::c_char,
                    __base: ::std::os::raw::c_int)
      -> ::std::os::raw::c_ulonglong;
 }
 extern "C" {
-    #[link_name = "_Z7strtoll"]
     pub fn strtoll(__nptr: *const ::std::os::raw::c_char,
                    __endptr: *mut *mut ::std::os::raw::c_char,
                    __base: ::std::os::raw::c_int)
      -> ::std::os::raw::c_longlong;
 }
 extern "C" {
-    #[link_name = "_Z8strtoull"]
     pub fn strtoull(__nptr: *const ::std::os::raw::c_char,
                     __endptr: *mut *mut ::std::os::raw::c_char,
                     __base: ::std::os::raw::c_int)
      -> ::std::os::raw::c_ulonglong;
 }
 extern "C" {
-    #[link_name = "_Z4l64a"]
     pub fn l64a(__n: ::std::os::raw::c_long) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z4a64l"]
     pub fn a64l(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;
 }
 pub type u_char = __u_char;
@@ -748,30 +732,25 @@ impl Clone for fd_set {
 }
 pub type fd_mask = __fd_mask;
 extern "C" {
-    #[link_name = "_Z6select"]
     pub fn select(__nfds: ::std::os::raw::c_int, __readfds: *mut fd_set,
                   __writefds: *mut fd_set, __exceptfds: *mut fd_set,
                   __timeout: *mut timeval) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7pselect"]
     pub fn pselect(__nfds: ::std::os::raw::c_int, __readfds: *mut fd_set,
                    __writefds: *mut fd_set, __exceptfds: *mut fd_set,
                    __timeout: *const timespec, __sigmask: *const __sigset_t)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z13gnu_dev_major"]
     pub fn gnu_dev_major(__dev: ::std::os::raw::c_ulonglong)
      -> ::std::os::raw::c_uint;
 }
 extern "C" {
-    #[link_name = "_Z13gnu_dev_minor"]
     pub fn gnu_dev_minor(__dev: ::std::os::raw::c_ulonglong)
      -> ::std::os::raw::c_uint;
 }
 extern "C" {
-    #[link_name = "_Z15gnu_dev_makedev"]
     pub fn gnu_dev_makedev(__major: ::std::os::raw::c_uint,
                            __minor: ::std::os::raw::c_uint)
      -> ::std::os::raw::c_ulonglong;
@@ -1045,21 +1024,17 @@ impl Clone for pthread_barrierattr_t {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    #[link_name = "_Z6random"]
     pub fn random() -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7srandom"]
     pub fn srandom(__seed: ::std::os::raw::c_uint);
 }
 extern "C" {
-    #[link_name = "_Z9initstate"]
     pub fn initstate(__seed: ::std::os::raw::c_uint,
                      __statebuf: *mut ::std::os::raw::c_char,
                      __statelen: usize) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z8setstate"]
     pub fn setstate(__statebuf: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
@@ -1085,77 +1060,61 @@ impl Clone for random_data {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    #[link_name = "_Z8random_r"]
     pub fn random_r(__buf: *mut random_data, __result: *mut i32)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9srandom_r"]
     pub fn srandom_r(__seed: ::std::os::raw::c_uint, __buf: *mut random_data)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z11initstate_r"]
     pub fn initstate_r(__seed: ::std::os::raw::c_uint,
                        __statebuf: *mut ::std::os::raw::c_char,
                        __statelen: usize, __buf: *mut random_data)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z10setstate_r"]
     pub fn setstate_r(__statebuf: *mut ::std::os::raw::c_char,
                       __buf: *mut random_data) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z4rand"]
     pub fn rand() -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z5srand"]
     pub fn srand(__seed: ::std::os::raw::c_uint);
 }
 extern "C" {
-    #[link_name = "_Z6rand_r"]
     pub fn rand_r(__seed: *mut ::std::os::raw::c_uint)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7drand48"]
     pub fn drand48() -> f64;
 }
 extern "C" {
-    #[link_name = "_Z7erand48"]
     pub fn erand48(__xsubi: *mut ::std::os::raw::c_ushort) -> f64;
 }
 extern "C" {
-    #[link_name = "_Z7lrand48"]
     pub fn lrand48() -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7nrand48"]
     pub fn nrand48(__xsubi: *mut ::std::os::raw::c_ushort)
      -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7mrand48"]
     pub fn mrand48() -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7jrand48"]
     pub fn jrand48(__xsubi: *mut ::std::os::raw::c_ushort)
      -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z7srand48"]
     pub fn srand48(__seedval: ::std::os::raw::c_long);
 }
 extern "C" {
-    #[link_name = "_Z6seed48"]
     pub fn seed48(__seed16v: *mut ::std::os::raw::c_ushort)
      -> *mut ::std::os::raw::c_ushort;
 }
 extern "C" {
-    #[link_name = "_Z7lcong48"]
     pub fn lcong48(__param: *mut ::std::os::raw::c_ushort);
 }
 #[repr(C)]
@@ -1178,115 +1137,93 @@ impl Clone for drand48_data {
     fn clone(&self) -> Self { *self }
 }
 extern "C" {
-    #[link_name = "_Z9drand48_r"]
     pub fn drand48_r(__buffer: *mut drand48_data, __result: *mut f64)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9erand48_r"]
     pub fn erand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
                      __buffer: *mut drand48_data, __result: *mut f64)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9lrand48_r"]
     pub fn lrand48_r(__buffer: *mut drand48_data,
                      __result: *mut ::std::os::raw::c_long)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9nrand48_r"]
     pub fn nrand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
                      __buffer: *mut drand48_data,
                      __result: *mut ::std::os::raw::c_long)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9mrand48_r"]
     pub fn mrand48_r(__buffer: *mut drand48_data,
                      __result: *mut ::std::os::raw::c_long)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9jrand48_r"]
     pub fn jrand48_r(__xsubi: *mut ::std::os::raw::c_ushort,
                      __buffer: *mut drand48_data,
                      __result: *mut ::std::os::raw::c_long)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9srand48_r"]
     pub fn srand48_r(__seedval: ::std::os::raw::c_long,
                      __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8seed48_r"]
     pub fn seed48_r(__seed16v: *mut ::std::os::raw::c_ushort,
                     __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9lcong48_r"]
     pub fn lcong48_r(__param: *mut ::std::os::raw::c_ushort,
                      __buffer: *mut drand48_data) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6malloc"]
     pub fn malloc(__size: usize) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z6calloc"]
     pub fn calloc(__nmemb: usize, __size: usize)
      -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z7realloc"]
     pub fn realloc(__ptr: *mut ::std::os::raw::c_void, __size: usize)
      -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z4free"]
     pub fn free(__ptr: *mut ::std::os::raw::c_void);
 }
 extern "C" {
-    #[link_name = "_Z5cfree"]
     pub fn cfree(__ptr: *mut ::std::os::raw::c_void);
 }
 extern "C" {
-    #[link_name = "_Z6alloca"]
     pub fn alloca(__size: usize) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z6valloc"]
     pub fn valloc(__size: usize) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z14posix_memalign"]
     pub fn posix_memalign(__memptr: *mut *mut ::std::os::raw::c_void,
                           __alignment: usize, __size: usize)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z13aligned_alloc"]
     pub fn aligned_alloc(__alignment: usize, __size: usize)
      -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z5abort"]
     pub fn abort();
 }
 extern "C" {
-    #[link_name = "_Z6atexit"]
     pub fn atexit(__func: ::std::option::Option<unsafe extern "C" fn()>)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z13at_quick_exit"]
     pub fn at_quick_exit(__func:
                              ::std::option::Option<unsafe extern "C" fn()>)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7on_exit"]
     pub fn on_exit(__func:
                        ::std::option::Option<unsafe extern "C" fn(__status:
                                                                       ::std::os::raw::c_int,
@@ -1296,70 +1233,56 @@ extern "C" {
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z4exit"]
     pub fn exit(__status: ::std::os::raw::c_int);
 }
 extern "C" {
-    #[link_name = "_Z10quick_exit"]
     pub fn quick_exit(__status: ::std::os::raw::c_int);
 }
 extern "C" {
-    #[link_name = "_Z5_Exit"]
     pub fn _Exit(__status: ::std::os::raw::c_int);
 }
 extern "C" {
-    #[link_name = "_Z6getenv"]
     pub fn getenv(__name: *const ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z6putenv"]
     pub fn putenv(__string: *mut ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6setenv"]
     pub fn setenv(__name: *const ::std::os::raw::c_char,
                   __value: *const ::std::os::raw::c_char,
                   __replace: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8unsetenv"]
     pub fn unsetenv(__name: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8clearenv"]
     pub fn clearenv() -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6mktemp"]
     pub fn mktemp(__template: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z7mkstemp"]
     pub fn mkstemp(__template: *mut ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8mkstemps"]
     pub fn mkstemps(__template: *mut ::std::os::raw::c_char,
                     __suffixlen: ::std::os::raw::c_int)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7mkdtemp"]
     pub fn mkdtemp(__template: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z6system"]
     pub fn system(__command: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8realpath"]
     pub fn realpath(__name: *const ::std::os::raw::c_char,
                     __resolved: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
@@ -1371,87 +1294,72 @@ pub type __compar_fn_t =
                                                    *const ::std::os::raw::c_void)
                               -> ::std::os::raw::c_int>;
 extern "C" {
-    #[link_name = "_Z7bsearch"]
     pub fn bsearch(__key: *const ::std::os::raw::c_void,
                    __base: *const ::std::os::raw::c_void, __nmemb: usize,
                    __size: usize, __compar: __compar_fn_t)
      -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    #[link_name = "_Z5qsort"]
     pub fn qsort(__base: *mut ::std::os::raw::c_void, __nmemb: usize,
                  __size: usize, __compar: __compar_fn_t);
 }
 extern "C" {
-    #[link_name = "_Z3abs"]
     pub fn abs(__x: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z4labs"]
     pub fn labs(__x: ::std::os::raw::c_long) -> ::std::os::raw::c_long;
 }
 extern "C" {
-    #[link_name = "_Z5llabs"]
     pub fn llabs(__x: ::std::os::raw::c_longlong)
      -> ::std::os::raw::c_longlong;
 }
 extern "C" {
-    #[link_name = "_Z3div"]
     pub fn div(__numer: ::std::os::raw::c_int, __denom: ::std::os::raw::c_int)
      -> div_t;
 }
 extern "C" {
-    #[link_name = "_Z4ldiv"]
     pub fn ldiv(__numer: ::std::os::raw::c_long,
                 __denom: ::std::os::raw::c_long) -> ldiv_t;
 }
 extern "C" {
-    #[link_name = "_Z5lldiv"]
     pub fn lldiv(__numer: ::std::os::raw::c_longlong,
                  __denom: ::std::os::raw::c_longlong) -> lldiv_t;
 }
 extern "C" {
-    #[link_name = "_Z4ecvt"]
     pub fn ecvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                 __decpt: *mut ::std::os::raw::c_int,
                 __sign: *mut ::std::os::raw::c_int)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z4fcvt"]
     pub fn fcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                 __decpt: *mut ::std::os::raw::c_int,
                 __sign: *mut ::std::os::raw::c_int)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z4gcvt"]
     pub fn gcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                 __buf: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z5qecvt"]
     pub fn qecvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                  __decpt: *mut ::std::os::raw::c_int,
                  __sign: *mut ::std::os::raw::c_int)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z5qfcvt"]
     pub fn qfcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                  __decpt: *mut ::std::os::raw::c_int,
                  __sign: *mut ::std::os::raw::c_int)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z5qgcvt"]
     pub fn qgcvt(__value: f64, __ndigit: ::std::os::raw::c_int,
                  __buf: *mut ::std::os::raw::c_char)
      -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    #[link_name = "_Z6ecvt_r"]
     pub fn ecvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
                   __decpt: *mut ::std::os::raw::c_int,
                   __sign: *mut ::std::os::raw::c_int,
@@ -1459,7 +1367,6 @@ extern "C" {
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6fcvt_r"]
     pub fn fcvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
                   __decpt: *mut ::std::os::raw::c_int,
                   __sign: *mut ::std::os::raw::c_int,
@@ -1467,7 +1374,6 @@ extern "C" {
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7qecvt_r"]
     pub fn qecvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
                    __decpt: *mut ::std::os::raw::c_int,
                    __sign: *mut ::std::os::raw::c_int,
@@ -1475,7 +1381,6 @@ extern "C" {
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z7qfcvt_r"]
     pub fn qfcvt_r(__value: f64, __ndigit: ::std::os::raw::c_int,
                    __decpt: *mut ::std::os::raw::c_int,
                    __sign: *mut ::std::os::raw::c_int,
@@ -1483,44 +1388,36 @@ extern "C" {
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z5mblen"]
     pub fn mblen(__s: *const ::std::os::raw::c_char, __n: usize)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6mbtowc"]
     pub fn mbtowc(__pwc: *mut wchar_t, __s: *const ::std::os::raw::c_char,
                   __n: usize) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z6wctomb"]
     pub fn wctomb(__s: *mut ::std::os::raw::c_char, __wchar: wchar_t)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z8mbstowcs"]
     pub fn mbstowcs(__pwcs: *mut wchar_t, __s: *const ::std::os::raw::c_char,
                     __n: usize) -> usize;
 }
 extern "C" {
-    #[link_name = "_Z8wcstombs"]
     pub fn wcstombs(__s: *mut ::std::os::raw::c_char, __pwcs: *const wchar_t,
                     __n: usize) -> usize;
 }
 extern "C" {
-    #[link_name = "_Z7rpmatch"]
     pub fn rpmatch(__response: *const ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z9getsubopt"]
     pub fn getsubopt(__optionp: *mut *mut ::std::os::raw::c_char,
                      __tokens: *const *const ::std::os::raw::c_char,
                      __valuep: *mut *mut ::std::os::raw::c_char)
      -> ::std::os::raw::c_int;
 }
 extern "C" {
-    #[link_name = "_Z10getloadavg"]
     pub fn getloadavg(__loadavg: *mut f64, __nelem: ::std::os::raw::c_int)
      -> ::std::os::raw::c_int;
 }
@@ -1879,7 +1776,6 @@ extern "C" {
     @retval CUBEB_OK in case of success.
     @retval CUBEB_ERROR in case of error, for example because the host
                         has no audio hardware. */
-    #[link_name = "_Z10cubeb_init"]
     pub fn cubeb_init(context: *mut *mut cubeb,
                       context_name: *const ::std::os::raw::c_char,
                       backend_name: *const ::std::os::raw::c_char)
@@ -1889,7 +1785,6 @@ extern "C" {
     /** Get a read-only string identifying this context's current backend.
     @param context A pointer to the cubeb context.
     @retval Read-only string identifying current backend. */
-    #[link_name = "_Z20cubeb_get_backend_id"]
     pub fn cubeb_get_backend_id(context: *mut cubeb)
      -> *const ::std::os::raw::c_char;
 }
@@ -1901,7 +1796,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER
     @retval CUBEB_ERROR_NOT_SUPPORTED
     @retval CUBEB_ERROR */
-    #[link_name = "_Z27cubeb_get_max_channel_count"]
     pub fn cubeb_get_max_channel_count(context: *mut cubeb,
                                        max_channels: *mut u32)
      -> ::std::os::raw::c_int;
@@ -1918,7 +1812,6 @@ extern "C" {
     @retval CUBEB_OK
     @retval CUBEB_ERROR_INVALID_PARAMETER
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z21cubeb_get_min_latency"]
     pub fn cubeb_get_min_latency(context: *mut cubeb,
                                  params: *mut cubeb_stream_params,
                                  latency_frames: *mut u32)
@@ -1932,7 +1825,6 @@ extern "C" {
     @retval CUBEB_OK
     @retval CUBEB_ERROR_INVALID_PARAMETER
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z31cubeb_get_preferred_sample_rate"]
     pub fn cubeb_get_preferred_sample_rate(context: *mut cubeb,
                                            rate: *mut u32)
      -> ::std::os::raw::c_int;
@@ -1945,7 +1837,6 @@ extern "C" {
     @retval CUBEB_OK
     @retval CUBEB_ERROR_INVALID_PARAMETER
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z34cubeb_get_preferred_channel_layout"]
     pub fn cubeb_get_preferred_channel_layout(context: *mut cubeb,
                                               layout:
                                                   *mut cubeb_channel_layout)
@@ -1955,7 +1846,6 @@ extern "C" {
     /** Destroy an application context. This must be called after all stream have
  *  been destroyed.
     @param context A pointer to the cubeb context.*/
-    #[link_name = "_Z13cubeb_destroy"]
     pub fn cubeb_destroy(context: *mut cubeb);
 }
 extern "C" {
@@ -1983,7 +1873,6 @@ extern "C" {
     @retval CUBEB_ERROR
     @retval CUBEB_ERROR_INVALID_FORMAT
     @retval CUBEB_ERROR_DEVICE_UNAVAILABLE */
-    #[link_name = "_Z17cubeb_stream_init"]
     pub fn cubeb_stream_init(context: *mut cubeb,
                              stream: *mut *mut cubeb_stream,
                              stream_name: *const ::std::os::raw::c_char,
@@ -2001,7 +1890,6 @@ extern "C" {
     /** Destroy a stream. `cubeb_stream_stop` MUST be called before destroying a
     stream.
     @param stream The stream to destroy. */
-    #[link_name = "_Z20cubeb_stream_destroy"]
     pub fn cubeb_stream_destroy(stream: *mut cubeb_stream);
 }
 extern "C" {
@@ -2009,7 +1897,6 @@ extern "C" {
     @param stream
     @retval CUBEB_OK
     @retval CUBEB_ERROR */
-    #[link_name = "_Z18cubeb_stream_start"]
     pub fn cubeb_stream_start(stream: *mut cubeb_stream)
      -> ::std::os::raw::c_int;
 }
@@ -2018,7 +1905,6 @@ extern "C" {
     @param stream
     @retval CUBEB_OK
     @retval CUBEB_ERROR */
-    #[link_name = "_Z17cubeb_stream_stop"]
     pub fn cubeb_stream_stop(stream: *mut cubeb_stream)
      -> ::std::os::raw::c_int;
 }
@@ -2029,7 +1915,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER
     @retval CUBEB_ERROR_NOT_SUPPORTED
     @retval CUBEB_ERROR */
-    #[link_name = "_Z33cubeb_stream_reset_default_device"]
     pub fn cubeb_stream_reset_default_device(stream: *mut cubeb_stream)
      -> ::std::os::raw::c_int;
 }
@@ -2039,7 +1924,6 @@ extern "C" {
     @param position Playback position in frames.
     @retval CUBEB_OK
     @retval CUBEB_ERROR */
-    #[link_name = "_Z25cubeb_stream_get_position"]
     pub fn cubeb_stream_get_position(stream: *mut cubeb_stream,
                                      position: *mut u64)
      -> ::std::os::raw::c_int;
@@ -2053,7 +1937,6 @@ extern "C" {
     @retval CUBEB_OK
     @retval CUBEB_ERROR_NOT_SUPPORTED
     @retval CUBEB_ERROR */
-    #[link_name = "_Z24cubeb_stream_get_latency"]
     pub fn cubeb_stream_get_latency(stream: *mut cubeb_stream,
                                     latency: *mut u32)
      -> ::std::os::raw::c_int;
@@ -2066,7 +1949,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER volume is outside [0.0, 1.0] or
             stream is an invalid pointer
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z23cubeb_stream_set_volume"]
     pub fn cubeb_stream_set_volume(stream: *mut cubeb_stream, volume: f32)
      -> ::std::os::raw::c_int;
 }
@@ -2083,7 +1965,6 @@ extern "C" {
             outside the [-1.0, 1.0] range.
     @retval CUBEB_ERROR_NOT_SUPPORTED
     @retval CUBEB_ERROR stream is not mono nor stereo */
-    #[link_name = "_Z24cubeb_stream_set_panning"]
     pub fn cubeb_stream_set_panning(stream: *mut cubeb_stream, panning: f32)
      -> ::std::os::raw::c_int;
 }
@@ -2095,7 +1976,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER if either stm, device or count are
             invalid pointers
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z31cubeb_stream_get_current_device"]
     pub fn cubeb_stream_get_current_device(stm: *mut cubeb_stream,
                                            device: *const *mut cubeb_device)
      -> ::std::os::raw::c_int;
@@ -2107,7 +1987,6 @@ extern "C" {
     @retval CUBEB_OK in case of success
     @retval CUBEB_ERROR_INVALID_PARAMETER if devices is an invalid pointer
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z27cubeb_stream_device_destroy"]
     pub fn cubeb_stream_device_destroy(stream: *mut cubeb_stream,
                                        devices: *mut cubeb_device)
      -> ::std::os::raw::c_int;
@@ -2121,7 +2000,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER if either stream or
             device_changed_callback are invalid pointers.
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z45cubeb_stream_register_device_changed_callback"]
     pub fn cubeb_stream_register_device_changed_callback(stream:
                                                              *mut cubeb_stream,
                                                          device_changed_callback:
@@ -2136,7 +2014,6 @@ extern "C" {
     @retval CUBEB_OK in case of success
     @retval CUBEB_ERROR_INVALID_PARAMETER if collection is an invalid pointer
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z23cubeb_enumerate_devices"]
     pub fn cubeb_enumerate_devices(context: *mut cubeb,
                                    devtype: cubeb_device_type,
                                    collection: *mut cubeb_device_collection)
@@ -2148,7 +2025,6 @@ extern "C" {
     @param collection collection to destroy
     @retval CUBEB_OK
     @retval CUBEB_ERROR_INVALID_PARAMETER if collection is an invalid pointer */
-    #[link_name = "_Z31cubeb_device_collection_destroy"]
     pub fn cubeb_device_collection_destroy(context: *mut cubeb,
                                            collection:
                                                *mut cubeb_device_collection)
@@ -2164,7 +2040,6 @@ extern "C" {
     @param user_ptr pointer to user specified data which will be present in
            subsequent callbacks.
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-    #[link_name = "_Z40cubeb_register_device_collection_changed"]
     pub fn cubeb_register_device_collection_changed(context: *mut cubeb,
                                                     devtype:
                                                         cubeb_device_type,
@@ -2183,7 +2058,6 @@ extern "C" {
     @retval CUBEB_ERROR_INVALID_PARAMETER if either context or log_callback are
                                           invalid pointers, or if level is not
                                           in cubeb_log_level. */
-    #[link_name = "_Z22cubeb_set_log_callback"]
     pub fn cubeb_set_log_callback(log_level: cubeb_log_level,
                                   log_callback: cubeb_log_callback)
      -> ::std::os::raw::c_int;

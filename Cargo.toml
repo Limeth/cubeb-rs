@@ -8,7 +8,7 @@ repository = "https://github.com/Limeth/cubeb-rs"
 readme = "README.md"
 keywords = ["audio", "bindings"]
 license = "MIT"
-# links = "cubeb"
+# links = "libstdc++"
 build = "build.rs"
 
 [features]
