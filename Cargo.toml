@@ -1,0 +1,26 @@
+[package]
+name = "cubeb"
+version = "0.1.0"
+authors = ["Jakub Hlusička <limeth@protonmail.com>"]
+description = "Rust abstraction for the cross-platform audio library Cubeb"
+documentation = "https://docs.rs/cubeb"
+repository = "https://github.com/Limeth/cubeb-rs"
+readme = "README.md"
+keywords = ["audio", "bindings"]
+license = "MIT"
+# links = "cubeb"
+build = "build.rs"
+
+[features]
+clean-cubeb = []
+build-cubeb = []
+# plugins = ["heapsize", "heapsize_plugin"]
+
+[build-dependencies]
+pkg-config = "0.3.5"
+submodules = "0.1.0"
+
+[dependencies]
+libc = "0.2.26"
+# heapsize = {version = ">=0.2, <0.4", optional = true}
+# heapsize_plugin = {version = "0.1.0", optional = true}
