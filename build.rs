@@ -4,9 +4,9 @@
 extern crate pkg_config;
 extern crate submodules;
 
-use std::fs::File;
+use std::fs::OpenOptions;
 use std::path::Path;
-use std::io::{BufReader, BufRead};
+use std::io::{BufReader, BufRead, BufWriter, Write};
 use std::process::Command;
 use std::env;
 
@@ -19,19 +19,45 @@ fn check_command(cmd: &str) -> bool {
 }
 
 fn append_to_cubeb_cmakelists(path: &Path) {
-    const lines_to_add: &str = r#"# Start of auto-generated code by cubeb-rs
+    const LINES_TO_ADD: &str = r#"# Start of auto-generated code by cubeb-rs
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 # End of auto-generated code by cubeb-rs"#;
-    let mut file = File::open(path).expect("Could not open CMakeLists.txt");
-    let mut reader = BufReader::new(file);
+    let mut lines_to_add_iter = LINES_TO_ADD.lines();
+    let mut current_line_to_add = lines_to_add_iter.next();
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .open(path)
+        .expect("Could not open CMakeLists.txt");
 
-    for line in reader.lines() {
-        match line {
-            Ok(line) => println!("{}", line),
-            Err(err) => panic!("{}", err),
+    {
+        let reader = BufReader::new(&file);
+
+        for line in reader.lines() {
+            match line {
+                Ok(line) => {
+                    if line == current_line_to_add.unwrap() {
+                        match lines_to_add_iter.next() {
+                            Some(next_line_to_add) => current_line_to_add = Some(next_line_to_add),
+                            None => return,
+                        }
+                    }
+                },
+                Err(err) => panic!("{}", err),
+            }
         }
     }
+
+    let mut writer = BufWriter::new(file);
+
+    while current_line_to_add.is_some() {
+        writeln!(writer, "{}", current_line_to_add.unwrap())
+            .expect(&format!("Could not write the line '{}' to CMakeLists.txt", current_line_to_add.unwrap()));
+        current_line_to_add = lines_to_add_iter.next();
+    }
+
+    writer.flush().expect("Could not update CMakeLists.txt");
 }
 
 fn main()
@@ -52,8 +78,6 @@ fn main()
     println!("cargo:rustc-link-lib=dylib=cubeb");
     return
   }
-
-  let out_dir = env::var("OUT_DIR").unwrap();
 
   let cubeb_dir = "cubeb";
   let cubeb_build_dir = "build";
