@@ -4,7 +4,7 @@ use std::mem;
 /// Documentation of the variants specifies the channel layout
 #[repr(u32)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
-pub enum Layout {
+pub enum ChannelLayout {
     /// Indicate the speaker's layout is undefined.
     Undefined,
     /// Left, Right
@@ -45,14 +45,14 @@ pub enum Layout {
     Front3Surround4LFE,
 }
 
-impl From<ffi::cubeb_channel_layout> for Layout {
+impl From<ffi::cubeb_channel_layout> for ChannelLayout {
     fn from(other: ffi::cubeb_channel_layout) -> Self {
         unsafe { mem::transmute(other) }
     }
 }
 
-impl From<Layout> for ffi::cubeb_channel_layout {
-    fn from(other: Layout) -> Self {
+impl From<ChannelLayout> for ffi::cubeb_channel_layout {
+    fn from(other: ChannelLayout) -> Self {
         unsafe { mem::transmute(other) }
     }
 }

@@ -1,7 +1,8 @@
 use ffi;
 use std::mem;
 
-/// Documentation of the variants specifies the channel layout
+/// You most likely want to use the `signed_16_native_endian` and `float_32_native_endian`
+/// functions to retrieve the correct value for your system.
 #[repr(u32)]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum SampleFormat {
@@ -13,22 +14,22 @@ pub enum SampleFormat {
 
 impl SampleFormat {
     #[cfg(target_endian = "little")]
-    fn signed_16_native_endian() -> Self {
+    pub fn signed_16_native_endian() -> Self {
         SampleFormat::Signed16LittleEndian
     }
 
     #[cfg(target_endian = "big")]
-    fn signed_16_native_endian() -> Self {
+    pub fn signed_16_native_endian() -> Self {
         SampleFormat::Signed16BigEndian
     }
 
     #[cfg(target_endian = "little")]
-    fn float_32_native_endian() -> Self {
+    pub fn float_32_native_endian() -> Self {
         SampleFormat::Float32LittleEndian
     }
 
     #[cfg(target_endian = "big")]
-    fn float_32_native_endian() -> Self {
+    pub fn float_32_native_endian() -> Self {
         SampleFormat::Float32BigEndian
     }
 }

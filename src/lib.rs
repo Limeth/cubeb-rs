@@ -8,25 +8,54 @@ extern crate libc;
 
 mod ffi;
 pub mod error;
-pub mod layout;
+pub mod channel_layout;
 pub mod sample_format;
+
+pub use error::*;
+pub use channel_layout::*;
+pub use sample_format::*;
 
 use std::mem;
 use std::ffi::CStr;
 use std::ffi::CString;
-use error::Error;
-use layout::Layout;
+
+#[derive(Clone, Debug)]
+pub struct StreamParams {
+    raw: ffi::cubeb_stream_params,
+}
+
+impl StreamParams {
+    pub fn new(format: SampleFormat, rate: u32, channels: u32, layout: ChannelLayout) -> Self {
+        StreamParams {
+            raw: ffi::cubeb_stream_params {
+                format: format.into(),
+                rate,
+                channels,
+                layout: layout.into(),
+            }
+        }
+    }
+
+    pub fn default(ctx: &Cubeb, format: SampleFormat) -> Result<StreamParams, Error> {
+        Ok(StreamParams::new(
+            format,
+            ctx.get_preferred_sample_rate()?,
+            ctx.get_max_channel_count()?,
+            ctx.get_preferred_channel_layout()?,
+        ))
+    }
+}
 
 pub struct Cubeb {
     context: *mut ffi::cubeb,
 }
 
 macro_rules! getter_body {
-    ($ffi_prefix:ident, $field:expr, $name:ident) => {
+    ($ffi_prefix:ident, $field:expr, $name:ident$($other_fields:tt)*) => {
         unsafe {
             use ffi::*; // Maybe proc macros can be used to avoid this
             let result = &mut mem::uninitialized() as *mut _;
-            let error_code = concat_idents!($ffi_prefix, $name)($field, result);
+            let error_code = concat_idents!($ffi_prefix, $name)($field$($other_fields)*, result);
 
             if let Some(error) = Error::cubeb(error_code) {
                 Err(error)
@@ -70,12 +99,22 @@ impl Cubeb {
         }
     }
 
-    pub fn get_preferred_channel_layout(&self) -> Result<Layout, Error> {
+    pub fn get_min_latency(&self, stream_params: &StreamParams) -> Result<u32, Error> {
+        let mut stream_params_raw = stream_params.raw.clone();
+        getter_body!(cubeb_, self.context, get_min_latency, &mut stream_params_raw as *mut _)
+    }
+
+    pub fn get_preferred_channel_layout(&self) -> Result<ChannelLayout, Error> {
         getter_body!(cubeb_, self.context, get_preferred_channel_layout).map(|l| l.into())
     }
 
     getter!(cubeb_, context, get_max_channel_count, u32);
     getter!(cubeb_, context, get_preferred_sample_rate, u32);
+
+    // Non-FFI bindings follow
+    pub fn default_stream_params(&self, format: SampleFormat) -> Result<StreamParams, Error> {
+        StreamParams::default(self, format)
+    }
 }
 
 impl Drop for Cubeb {
@@ -93,9 +132,12 @@ mod tests {
     #[test]
     fn it_works() {
         let ctx = Cubeb::new("cubeb-rs-test").unwrap();
+        let stream_params = ctx.default_stream_params(SampleFormat::float_32_native_endian());
         println!("get_backend_id: {}", ctx.get_backend_id());
         println!("get_max_channel_count: {:?}", ctx.get_max_channel_count());
         println!("get_preferred_sample_rate: {:?}", ctx.get_preferred_sample_rate());
         println!("get_preferred_channel_layout: {:?}", ctx.get_preferred_channel_layout());
+        println!("default_stream_params: {:?}", stream_params);
+        println!("get_min_latency: {:?}", ctx.get_min_latency(&stream_params.unwrap()));
     }
 }
