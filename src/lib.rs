@@ -8,11 +8,14 @@ extern crate libc;
 
 mod ffi;
 pub mod error;
+pub mod layout;
+pub mod sample_format;
 
 use std::mem;
 use std::ffi::CStr;
 use std::ffi::CString;
 use error::Error;
+use layout::Layout;
 
 pub struct Cubeb {
     context: *mut ffi::cubeb,
@@ -42,16 +45,20 @@ macro_rules! getter {
 }
 
 impl Cubeb {
-    pub fn new<T: Into<Vec<u8>>>(name: T) -> Self {
+    pub fn new<T: Into<Vec<u8>>>(name: T) -> Result<Self, Error> {
         let mut context: *mut ffi::cubeb = ::std::ptr::null_mut();
         let context_name = CString::new(name).unwrap().as_ptr();
 
         unsafe {
-            ffi::cubeb_init(&mut context as *mut *mut ffi::cubeb, context_name, ::std::ptr::null());
-        }
+            let error_code = ffi::cubeb_init(&mut context as *mut *mut ffi::cubeb, context_name, ::std::ptr::null());
 
-        Cubeb {
-            context,
+            if let Some(error) = Error::cubeb(error_code) {
+                Err(error)
+            } else {
+                Ok(Cubeb {
+                    context,
+                })
+            }
         }
     }
 
@@ -61,6 +68,10 @@ impl Cubeb {
                 .to_str()
                 .expect("The backend ID isn't a UTF-8 string for some reason.")
         }
+    }
+
+    pub fn get_preferred_channel_layout(&self) -> Result<Layout, Error> {
+        getter_body!(cubeb_, self.context, get_preferred_channel_layout).map(|l| l.into())
     }
 
     getter!(cubeb_, context, get_max_channel_count, u32);
@@ -81,9 +92,10 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let ctx = Cubeb::new("cubeb-rs-test");
+        let ctx = Cubeb::new("cubeb-rs-test").unwrap();
         println!("get_backend_id: {}", ctx.get_backend_id());
         println!("get_max_channel_count: {:?}", ctx.get_max_channel_count());
         println!("get_preferred_sample_rate: {:?}", ctx.get_preferred_sample_rate());
+        println!("get_preferred_channel_layout: {:?}", ctx.get_preferred_channel_layout());
     }
 }
