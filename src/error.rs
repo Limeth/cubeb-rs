@@ -28,11 +28,11 @@ impl ErrorKind {
 impl ErrorKind {
     pub fn description(&self) -> &'static str {
         match *self {
-            ErrorKind::General => "General Cubeb error; something went wrong",
-            ErrorKind::InvalidFormat => "Invalid format",
-            ErrorKind::InvalidParameter => "Invalid parameter",
-            ErrorKind::NotSupported => "Operation not supported",
-            ErrorKind::DeviceUnavailable => "Device unavailable",
+            ErrorKind::General => "Unclassified error.",
+            ErrorKind::InvalidFormat => "Unsupported #cubeb_stream_params requested.",
+            ErrorKind::InvalidParameter => "Invalid parameter specified.",
+            ErrorKind::NotSupported => "Optional function not implemented in current backend.",
+            ErrorKind::DeviceUnavailable => "Device specified by #cubeb_devid not available.",
         }
     }
 }

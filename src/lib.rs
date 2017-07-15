@@ -1,15 +1,17 @@
-#![allow(dead_code)]
-#![allow(non_camel_case_types)]
-#![allow(non_upper_case_globals)]
-#![allow(non_snake_case)]
 #![feature(concat_idents)]
 
 extern crate libc;
 
+pub mod device;
+
+#[allow(dead_code)]
+#[allow(non_camel_case_types)]
+#[allow(non_upper_case_globals)]
+#[allow(non_snake_case)]
 mod ffi;
-pub mod error;
-pub mod channel_layout;
-pub mod sample_format;
+mod error;
+mod channel_layout;
+mod sample_format;
 
 pub use error::*;
 pub use channel_layout::*;
