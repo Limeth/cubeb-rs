@@ -1,6 +1,8 @@
 #![feature(concat_idents)]
 
 extern crate libc;
+#[macro_use]
+extern crate lazy_static;
 
 pub mod device;
 
@@ -12,10 +14,12 @@ mod ffi;
 mod error;
 mod channel_layout;
 mod sample_format;
+mod log;
 
 pub use error::*;
 pub use channel_layout::*;
 pub use sample_format::*;
+pub use log::*;
 
 use std::mem;
 use std::ffi::CStr;
@@ -131,8 +135,13 @@ impl Drop for Cubeb {
 mod tests {
     use super::*;
 
+    fn string_callback(formatted: &str) {
+        println!("[Cubeb] {}", formatted);
+    }
+
     #[test]
     fn it_works() {
+        set_log_callback(LogLevel::Verbose, Some(string_callback)).unwrap();
         let ctx = Cubeb::new("cubeb-rs-test").unwrap();
         let stream_params = ctx.default_stream_params(SampleFormat::float_32_native_endian());
         println!("get_backend_id: {}", ctx.get_backend_id());
@@ -141,5 +150,8 @@ mod tests {
         println!("get_preferred_channel_layout: {:?}", ctx.get_preferred_channel_layout());
         println!("default_stream_params: {:?}", stream_params);
         println!("get_min_latency: {:?}", ctx.get_min_latency(&stream_params.unwrap()));
+
+        // TODO only here so I can see the logging output
+        for _ in 0..1_000_000 {}
     }
 }
