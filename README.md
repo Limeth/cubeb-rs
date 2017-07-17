@@ -1,3 +1,7 @@
+# Discontinued
+
+This project has been discontinued in favour of [the official Mozilla wrapper](https://github.com/djg/cubeb-rs).
+
 # cubeb-rs
 
 Rust abstraction for the cross-platform audio library Cubeb 
